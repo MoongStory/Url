@@ -1,6 +1,6 @@
 #include "URL.h"
 
-int MOONG::URL::Url::getProtocol(const std::string url, std::string& output) const
+int MOONG::URL::Url::getProtocol(const std::string url, std::string& output)
 {
 	output.clear();
 
@@ -19,7 +19,7 @@ int MOONG::URL::Url::getProtocol(const std::string url, std::string& output) con
 	return MOONG::URL::RETURN::SUCCESS;
 }
 
-int MOONG::URL::Url::getDomainName(std::string url, std::string& output) const
+int MOONG::URL::Url::getDomainName(std::string url, std::string& output)
 {
 	output.clear();
 
@@ -50,7 +50,7 @@ int MOONG::URL::Url::getDomainName(std::string url, std::string& output) const
 	return MOONG::URL::RETURN::SUCCESS;
 }
 
-int MOONG::URL::Url::getPort(std::string url, std::string& output) const
+int MOONG::URL::Url::getPort(std::string url, std::string& output)
 {
 	output.clear();
 
@@ -85,11 +85,11 @@ int MOONG::URL::Url::getPort(std::string url, std::string& output) const
 	return MOONG::URL::RETURN::SUCCESS;
 }
 
-int MOONG::URL::Url::getPort(std::string url, int* output) const
+int MOONG::URL::Url::getPort(std::string url, int* output)
 {
 	std::string port;
 
-	int return_value = this->getPort(url, port);
+	int return_value = MOONG::URL::Url::getPort(url, port);
 
 	if(return_value != MOONG::URL::RETURN::SUCCESS)
 	{
@@ -103,7 +103,7 @@ int MOONG::URL::Url::getPort(std::string url, int* output) const
 	return return_value;
 }
 
-int MOONG::URL::Url::getPathToTheFile(std::string url, std::string& output) const
+int MOONG::URL::Url::getPathToTheFile(std::string url, std::string& output)
 {
 	output.clear();
 
@@ -143,7 +143,7 @@ int MOONG::URL::Url::getPathToTheFile(std::string url, std::string& output) cons
 	return MOONG::URL::RETURN::SUCCESS;
 }
 
-int MOONG::URL::Url::getParameters(std::string url, std::string& output) const
+int MOONG::URL::Url::getParameters(std::string url, std::string& output)
 {
 	output.clear();
 
@@ -171,7 +171,7 @@ int MOONG::URL::Url::getParameters(std::string url, std::string& output) const
 	return MOONG::URL::RETURN::SUCCESS;
 }
 
-int MOONG::URL::Url::getAnchor(std::string url, std::string& output) const
+int MOONG::URL::Url::getAnchor(std::string url, std::string& output)
 {
 	output.clear();
 
