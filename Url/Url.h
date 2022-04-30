@@ -34,32 +34,32 @@ namespace MOONG
 		// return
 		//		RETURN::SUCCESS
 		//		RETURN::FAILURE::PROTOCOL_NOT_FOUND
-		static int getProtocol(const std::string url, std::string& output);
+		static const std::string getProtocol(const std::string url);
 		
 		// return
 		//		RETURN::SUCCESS
-		static int getDomainName(std::string url, std::string& output);
+		static const std::string getDomainName(const std::string url);
 		
 		// return
 		//		RETURN::SUCCESS
 		//		RETURN::FAILURE::PORT_NOT_FOUND
-		static int getPort(std::string url, std::string& output);
-		static int getPort(std::string url, int* output);
+		static const std::string getPort(const std::string url);
+		static int getPort(const std::string url, int* output);
 		
 		// return
 		//		RETURN::SUCCESS
 		//		RETURN::FAILURE::PATH_TO_THE_FILE_NOT_FOUND
-		static int getPathToTheFile(std::string url, std::string& output);
+		static const std::string getPathToTheFile(const std::string url);
 		
 		// return
 		//		RETURN::SUCCESS
 		//		RETURN::FAILURE::PARAMETERS_NOT_FOUND
-		static int getParameters(std::string url, std::string& output);
+		static const std::string getParameters(const std::string url);
 		
 		// return
 		//		RETURN::SUCCESS
 		//		RETURN::FAILURE::ANCHOR_NOT_FOUND
-		static int getAnchor(std::string url, std::string& output);
+		static const std::string getAnchor(const std::string url);
 	};
 }
 

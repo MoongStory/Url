@@ -1,193 +1,204 @@
 #include "URL.h"
 
-int MOONG::Url::getProtocol(const std::string url, std::string& output)
+const std::string MOONG::Url::getProtocol(const std::string url)
 {
-	output.clear();
+	std::string output = url;
 
 	const char* separator_0 = "://";
 
-	size_t position = url.find(separator_0);
+	size_t position = output.find(separator_0);
 	if(position != std::string::npos)
 	{
-		output = url.substr(0, position);
+		output = output.substr(0, position);
 	}
 	else
 	{
-		return MOONG::URL::RETURN::FAILURE::PROTOCOL_NOT_FOUND;
+		return "";
 	}
 
-	return MOONG::URL::RETURN::SUCCESS;
+	return output;
 }
 
-int MOONG::Url::getDomainName(std::string url, std::string& output)
+const std::string MOONG::Url::getDomainName(const std::string url)
 {
-	output.clear();
+	std::string output = url;
 
 	const char* separator_0 = "://";
 	const char* separator_1 = ":";
 	const char* separator_2 = "/";
+	const char* separator_3 = "#";
 
-	size_t position = url.find(separator_0);
-	if(position != std::string::npos)
+	size_t position = output.find(separator_0);
+	if (position != std::string::npos)
 	{
-		url = url.substr(position + strlen(separator_0));
+		output = output.substr(position + strlen(separator_0));
 	}
 
-	position = url.find(separator_1);
-	if(position != std::string::npos)
+	position = output.find(separator_1);
+	if (position != std::string::npos)
 	{
-		url = url.substr(0, position);
+		output = output.substr(0, position);
 	}
 
-	position = url.find(separator_2);
-	if(position != std::string::npos)
+	position = output.find(separator_2);
+	if (position != std::string::npos)
 	{
-		url = url.substr(0, position);
+		output = output.substr(0, position);
 	}
 
-	output = url;
+	position = output.find(separator_3);
+	if (position != std::string::npos)
+	{
+		output = output.substr(0, position);
+	}
 
-	return MOONG::URL::RETURN::SUCCESS;
+	return output;
 }
 
-int MOONG::Url::getPort(std::string url, std::string& output)
+const std::string MOONG::Url::getPort(const std::string url)
 {
-	output.clear();
+	std::string output = url;
 
 	const char* separator_0 = "://";
 	const char* separator_1 = ":";
 	const char* separator_2 = "/";
+	const char* separator_3 = "#";
 
-	size_t position = url.find(separator_0);
+	size_t position = output.find(separator_0);
 	if(position != std::string::npos)
 	{
-		url = url.substr(position + strlen(separator_0));
+		output = output.substr(position + strlen(separator_0));
 	}
 
-	position = url.find(separator_1);
+	position = output.find(separator_1);
 	if(position != std::string::npos)
 	{
-		url = url.substr(position + strlen(separator_1));
+		output = output.substr(position + strlen(separator_1));
 	}
 	else
 	{
-		return MOONG::URL::RETURN::FAILURE::PORT_NOT_FOUND;
+		return "";
 	}
 
-	position = url.find(separator_2);
-	if(position != std::string::npos)
+	position = output.find(separator_2);
+	if (position != std::string::npos)
 	{
-		url = url.substr(0, position);
+		output = output.substr(0, position);
 	}
 
-	output = url;
+	position = output.find(separator_3);
+	if (position != std::string::npos)
+	{
+		output = output.substr(0, position);
+	}
 
-	return MOONG::URL::RETURN::SUCCESS;
+	return output;
 }
 
-int MOONG::Url::getPort(std::string url, int* output)
+int MOONG::Url::getPort(const std::string url, int* output)
 {
-	std::string port;
+	std::string port = MOONG::Url::getPort(url);
 
-	int return_value = MOONG::Url::getPort(url, port);
-
-	if(return_value != MOONG::URL::RETURN::SUCCESS)
+	if(port.length() <= 0)
 	{
 		*output = -1;	// 포트가 0인 경우가 있을수도 있으므로 -1로 초기화한다.
+
+		return MOONG::URL::RETURN::FAILURE::PORT_NOT_FOUND;
 	}
 	else
 	{
 		*output = atoi(port.c_str());
 	}
 
-	return return_value;
+	return MOONG::URL::RETURN::SUCCESS;
 }
 
-int MOONG::Url::getPathToTheFile(std::string url, std::string& output)
+const std::string MOONG::Url::getPathToTheFile(const std::string url)
 {
-	output.clear();
+	std::string output = url;
 
 	const char* separator_0 = "://";
 	const char* separator_1 = "/";
 	const char* separator_2 = "?";
+	const char* separator_3 = "#";
 
-	size_t position = url.find(separator_0);
+	size_t position = output.find(separator_0);
 	if(position != std::string::npos)
 	{
-		url = url.substr(position + strlen(separator_0));
+		output = output.substr(position + strlen(separator_0));
 	}
 
-	position = url.find(separator_1);
+	position = output.find(separator_1);
 	if(position != std::string::npos)
 	{
-		url = url.substr(position + strlen(separator_1));
+		output = output.substr(position + strlen(separator_1));
 	}
 	else
 	{
-		return MOONG::URL::RETURN::FAILURE::PATH_TO_THE_FILE_NOT_FOUND;
+		return "";
 	}
 
-	if(url.length() <= 0)
+	if(output.length() <= 0)
 	{
-		return MOONG::URL::RETURN::FAILURE::PATH_TO_THE_FILE_NOT_FOUND;
+		return "";
 	}
 
-	position = url.find(separator_2);
-	if(position != std::string::npos)
+	position = output.find(separator_2);
+	if (position != std::string::npos)
 	{
-		url = url.substr(0, position);
+		output = output.substr(0, position);
 	}
 
-	output = url;
+	position = output.find(separator_3);
+	if (position != std::string::npos)
+	{
+		output = output.substr(0, position);
+	}
 
-	return MOONG::URL::RETURN::SUCCESS;
+	return output;
 }
 
-int MOONG::Url::getParameters(std::string url, std::string& output)
+const std::string MOONG::Url::getParameters(const std::string url)
 {
-	output.clear();
+	std::string output = url;
 
 	const char* separator_0 = "?";
 	const char* separator_1 = "#";
 
-	size_t position = url.find(separator_0);
+	size_t position = output.find(separator_0);
 	if(position != std::string::npos)
 	{
-		url = url.substr(position + strlen(separator_0));
+		output = output.substr(position + strlen(separator_0));
 	}
 	else
 	{
-		return MOONG::URL::RETURN::FAILURE::PARAMETERS_NOT_FOUND;
+		return "";
 	}
 
-	position = url.find(separator_1);
+	position = output.find(separator_1);
 	if(position != std::string::npos)
 	{
-		url = url.substr(0, position);
+		output = output.substr(0, position);
 	}
 
-	output = url;
-
-	return MOONG::URL::RETURN::SUCCESS;
+	return output;
 }
 
-int MOONG::Url::getAnchor(std::string url, std::string& output)
+const std::string MOONG::Url::getAnchor(std::string url)
 {
-	output.clear();
+	std::string output = url;
 
 	const char* separator_0 = "#";
 
-	size_t position = url.find(separator_0);
+	size_t position = output.find(separator_0);
 	if(position != std::string::npos)
 	{
-		url = url.substr(position + strlen(separator_0));
+		output = output.substr(position + strlen(separator_0));
 	}
 	else
 	{
-		return MOONG::URL::RETURN::FAILURE::ANCHOR_NOT_FOUND;
+		return "";
 	}
 
-	output = url;
-
-	return MOONG::URL::RETURN::SUCCESS;
+	return output;
 }
