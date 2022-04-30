@@ -12,10 +12,10 @@ int main()
 
 	printf("domain_name\n\t[%s]\n", MOONG::Url::getDomainName(url_address).c_str());
 
-	printf("port str\n\t[%s]\n", MOONG::Url::getPort(url_address).c_str());
-	int port_int = 0;
-	MOONG::Url::getPort(url_address, &port_int);
-	printf("port int\n\t[%d]\n", port_int);
+	std::string port;
+	MOONG::Url::getPort(url_address, port);
+	printf("port str\n\t[%s]\n", port.c_str());
+	printf("port int\n\t[%d]\n", MOONG::Url::getPort(url_address));
 
 	printf("path to the file\n\t[%s]\n", MOONG::Url::getPathToTheFile(url_address).c_str());
 	

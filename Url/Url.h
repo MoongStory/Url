@@ -43,9 +43,9 @@ namespace MOONG
 		// return
 		//		RETURN::SUCCESS
 		//		RETURN::FAILURE::PORT_NOT_FOUND
-		static const std::string getPort(const std::string url);
-		static int getPort(const std::string url, int* output);
-		
+		static const int getPort(const std::string url, std::string& output);
+		static const int getPort(const std::string url);
+
 		// return
 		//		RETURN::SUCCESS
 		//		RETURN::FAILURE::PATH_TO_THE_FILE_NOT_FOUND
