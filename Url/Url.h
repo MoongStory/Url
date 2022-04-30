@@ -19,11 +19,7 @@ namespace MOONG
 			
 			namespace FAILURE
 			{
-				static const int PROTOCOL_NOT_FOUND = 1;
-				static const int PORT_NOT_FOUND = 2;
-				static const int PARAMETERS_NOT_FOUND = 3;
-				static const int ANCHOR_NOT_FOUND = 4;
-				static const int PATH_TO_THE_FILE_NOT_FOUND = 5;
+				static const int PORT_NOT_FOUND = 1;
 			}
 		}
 	}
@@ -31,34 +27,21 @@ namespace MOONG
 	class Url
 	{
 	public:
-		// return
-		//		RETURN::SUCCESS
-		//		RETURN::FAILURE::PROTOCOL_NOT_FOUND
 		static const std::string getProtocol(const std::string url);
 		
-		// return
-		//		RETURN::SUCCESS
 		static const std::string getDomainName(const std::string url);
 		
 		// return
 		//		RETURN::SUCCESS
 		//		RETURN::FAILURE::PORT_NOT_FOUND
 		static const int getPort(const std::string url, std::string& output);
+
 		static const int getPort(const std::string url);
 
-		// return
-		//		RETURN::SUCCESS
-		//		RETURN::FAILURE::PATH_TO_THE_FILE_NOT_FOUND
 		static const std::string getPathToTheFile(const std::string url);
 		
-		// return
-		//		RETURN::SUCCESS
-		//		RETURN::FAILURE::PARAMETERS_NOT_FOUND
 		static const std::string getParameters(const std::string url);
 		
-		// return
-		//		RETURN::SUCCESS
-		//		RETURN::FAILURE::ANCHOR_NOT_FOUND
 		static const std::string getAnchor(const std::string url);
 	};
 }
