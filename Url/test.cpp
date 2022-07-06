@@ -4,7 +4,7 @@
 
 int main()
 {
-	const std::string url_address("http://www.example.com:80/path/to/myfile.html?key1=value1&key2=value2#SomewhereInTheDocument");
+	const std::string url_address("https://www.example.com/path/to/myfile.html?key1=value1&key2=value2#SomewhereInTheDocument");
 
 	printf("address\n\t[%s]\n\n", url_address.c_str());
 

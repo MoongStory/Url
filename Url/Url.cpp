@@ -1,5 +1,7 @@
 #include "URL.h"
 
+#include <algorithm>	// std::transform 사용을 위해 필요.
+
 const std::string MOONG::Url::getProtocol(const std::string url)
 {
 	std::string output = url;
@@ -59,6 +61,12 @@ const int MOONG::Url::getPort(const std::string url, std::string& output)
 {
 	output = url;
 
+	std::transform(output.begin(), output.end(), output.begin(), ::tolower);
+
+	bool is_https = output.find("https") != std::string::npos ? true : false;
+
+	output = url;
+
 	const char* separator_0 = "://";
 	const char* separator_1 = ":";
 	const char* separator_2 = "/";
@@ -76,7 +84,14 @@ const int MOONG::Url::getPort(const std::string url, std::string& output)
 	}
 	else
 	{
-		output = "";
+		if (is_https)
+		{
+			output = "443";	// https 기본 포트
+		}
+		else
+		{
+			output = "80";	// http 기본 포트
+		}
 
 		return MOONG::URL::RETURN::FAILURE::PORT_NOT_FOUND;
 	}
@@ -95,14 +110,7 @@ const int MOONG::Url::getPort(const std::string url)
 	std::string port;
 	MOONG::Url::getPort(url, port);
 
-	if(port.length() <= 0)
-	{
-		return -1;	// 포트가 0인 경우가 있을수도 있으므로 -1로 초기화한다.
-	}
-	else
-	{
-		return atoi(port.c_str());
-	}
+	return atoi(port.c_str());
 }
 
 const std::string MOONG::Url::getPathToTheFile(const std::string url)
