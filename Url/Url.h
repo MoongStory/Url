@@ -43,6 +43,15 @@ namespace MOONG
 		static const std::string getParameters(const std::string url);
 		
 		static const std::string getAnchor(const std::string url);
+
+		static const std::string encodeURI(const std::string& decoded);
+		static const std::string decodeURI(const std::string& encoded);
+		static const std::string encodeURIComponent(const std::string& decoded);
+		static const std::string decodeURIComponent(const std::string& encoded);
+
+	private:
+		static const char from_hex(const char ch);
+		static const char to_hex(const char code);
 	};
 }
 

@@ -23,5 +23,9 @@ int main()
 
 	printf("anchor\n\t[%s]\n", MOONG::Url::getAnchor(url_address).c_str());
 
+	std::string encoded_uri = MOONG::Url::encodeURIComponent(url_address);
+	printf("encodeURIComponent\n\t[%s]\n", encoded_uri.c_str());
+	printf("decodeURIComponent\n\t[%s]\n", MOONG::Url::decodeURIComponent(encoded_uri).c_str());
+
 	return 0;
 }

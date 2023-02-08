@@ -202,3 +202,76 @@ const std::string MOONG::Url::getAnchor(std::string url)
 
 	return output;
 }
+
+const std::string MOONG::Url::encodeURI(const std::string& decoded)
+{
+	return std::string();
+}
+
+const std::string MOONG::Url::decodeURI(const std::string& encoded)
+{
+	return std::string();
+}
+
+const std::string MOONG::Url::encodeURIComponent(const std::string& decoded)
+{
+	// FIXME: ÇÑ±Û ¾È µÊ.
+	std::string encode_uri;
+
+	for (size_t i = 0; i < decoded.length(); ++i) {
+		if (isalnum(decoded.at(i)) || decoded.at(i) == '-' || decoded.at(i) == '_' || decoded.at(i) == '.' || decoded.at(i) == '~')
+		{
+			encode_uri += decoded.at(i);
+		}
+		else if (decoded.at(i) == ' ')
+		{
+			encode_uri += '+';
+		}
+		else
+		{
+			encode_uri += '%';
+			encode_uri += to_hex(decoded.at(i) >> 4);
+			encode_uri += to_hex(decoded.at(i) & 15);
+		}
+	}
+
+	return encode_uri;
+}
+
+const std::string MOONG::Url::decodeURIComponent(const std::string& encoded)
+{
+	// FIXME: ÇÑ±Û ¾È µÊ.
+	std::string decode_uri;
+
+	for (size_t i = 0; i < encoded.length(); ++i) {
+		if (encoded.at(i) == '%')
+		{
+			if (encoded.at(i + 1) && encoded.at(i + 2))
+			{
+				decode_uri += from_hex(encoded.at(i + 1)) << 4 | from_hex(encoded.at(i + 2));
+				i += 2;
+			}
+		}
+		else if (encoded.at(i) == '+')
+		{
+			decode_uri += ' ';
+		}
+		else
+		{
+			decode_uri += encoded.at(i);
+		}
+	}
+
+	return decode_uri;
+}
+
+const char MOONG::Url::from_hex(const char ch)
+{
+	return isdigit(ch) ? ch - '0' : tolower(ch) - 'a' + 10;
+}
+
+const char MOONG::Url::to_hex(const char code)
+{
+	static char hex[] = "0123456789abcdef";
+	return hex[code & 15];
+}
