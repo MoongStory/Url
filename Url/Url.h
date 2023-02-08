@@ -52,6 +52,9 @@ namespace MOONG
 	private:
 		static const char from_hex(const char ch);
 		static const char to_hex(const char code);
+
+		static const std::string encodeURI_(const std::string& decoded, const bool use_component = false);
+		static const std::string decodeURI_(const std::string& encoded);
 	};
 }
 

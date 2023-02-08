@@ -205,41 +205,37 @@ const std::string MOONG::Url::getAnchor(std::string url)
 
 const std::string MOONG::Url::encodeURI(const std::string& decoded)
 {
-	std::string encode_uri;
-
-	std::string exception_characters;
-	exception_characters += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	exception_characters += "abcdefghijklmnopqrstuvwxyz";
-	exception_characters += "0123456789";
-	exception_characters += "-_.!~*'()";
-	exception_characters += ";/?:@&=+$,#";
-
-	for (size_t i = 0; i < decoded.length(); ++i) {
-		if (exception_characters.find(decoded.at(i)) != std::string::npos)
-		{
-			encode_uri += decoded.at(i);
-		}
-		else if (decoded.at(i) == ' ')
-		{
-			encode_uri += '+';
-		}
-		else
-		{
-			encode_uri += '%';
-			encode_uri += to_hex(decoded.at(i) >> 4);
-			encode_uri += to_hex(decoded.at(i) & 15);
-		}
-	}
-
-	return encode_uri;
+	return encodeURI_(decoded);
 }
 
 const std::string MOONG::Url::decodeURI(const std::string& encoded)
 {
-	return decodeURIComponent(encoded);
+	return decodeURI_(encoded);
 }
 
 const std::string MOONG::Url::encodeURIComponent(const std::string& decoded)
+{
+	return encodeURI_(decoded, true);
+}
+
+const std::string MOONG::Url::decodeURIComponent(const std::string& encoded)
+{
+	return decodeURI_(encoded);
+}
+
+const char MOONG::Url::from_hex(const char ch)
+{
+	return isdigit(ch) ? ch - '0' : toupper(ch) - 'A' + 10;
+}
+
+const char MOONG::Url::to_hex(const char code)
+{
+	static const char hex[] = "0123456789ABCDEF";
+
+	return hex[code & 15];
+}
+
+const std::string MOONG::Url::encodeURI_(const std::string& decoded, const bool use_component/* = false*/)
 {
 	std::string encode_uri;
 
@@ -248,6 +244,10 @@ const std::string MOONG::Url::encodeURIComponent(const std::string& decoded)
 	exception_characters += "abcdefghijklmnopqrstuvwxyz";
 	exception_characters += "0123456789";
 	exception_characters += "-_.!~*'()";
+	if (false == use_component)
+	{
+		exception_characters += ";/?:@&=+$,#";
+	}
 
 	for (size_t i = 0; i < decoded.length(); ++i) {
 		if (exception_characters.find(decoded.at(i)) != std::string::npos)
@@ -269,7 +269,7 @@ const std::string MOONG::Url::encodeURIComponent(const std::string& decoded)
 	return encode_uri;
 }
 
-const std::string MOONG::Url::decodeURIComponent(const std::string& encoded)
+const std::string MOONG::Url::decodeURI_(const std::string& encoded)
 {
 	std::string decode_uri;
 
@@ -293,15 +293,4 @@ const std::string MOONG::Url::decodeURIComponent(const std::string& encoded)
 	}
 
 	return decode_uri;
-}
-
-const char MOONG::Url::from_hex(const char ch)
-{
-	return isdigit(ch) ? ch - '0' : toupper(ch) - 'A' + 10;
-}
-
-const char MOONG::Url::to_hex(const char code)
-{
-	static char hex[] = "0123456789ABCDEF";
-	return hex[code & 15];
 }
