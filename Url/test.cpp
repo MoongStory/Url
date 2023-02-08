@@ -21,9 +21,13 @@ int main()
 	
 	printf("parameters\n\t[%s]\n", MOONG::Url::getParameters(url_address).c_str());
 
-	printf("anchor\n\t[%s]\n", MOONG::Url::getAnchor(url_address).c_str());
+	printf("anchor\n\t[%s]\n\n", MOONG::Url::getAnchor(url_address).c_str());
 
-	std::string encoded_uri = MOONG::Url::encodeURIComponent(url_address);
+	std::string encoded_uri = MOONG::Url::encodeURI("https://mozilla.org/?x=¬ê¬Ö¬Ý¬Ý¬í");
+	printf("encodeURI\n\t[%s]\n", encoded_uri.c_str());
+	printf("decodeURI\n\t[%s]\n\n", MOONG::Url::decodeURI(encoded_uri).c_str());
+
+	encoded_uri = MOONG::Url::encodeURIComponent(url_address);
 	printf("encodeURIComponent\n\t[%s]\n", encoded_uri.c_str());
 	printf("decodeURIComponent\n\t[%s]\n", MOONG::Url::decodeURIComponent(encoded_uri).c_str());
 
