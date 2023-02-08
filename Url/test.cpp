@@ -29,6 +29,7 @@ int main()
 	printf("encodeURI\n\t[%s]\n", encoded_uri.c_str());
 	printf("decodeURI\n\t[%s]\n\n", MOONG::Url::decodeURI(encoded_uri).c_str());
 
+	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent
 	encoded_uri = MOONG::Url::encodeURIComponent(MOONG::ConvertDataType::string_to_utf8(url_address));
 	printf("encodeURIComponent\n\t[%s]\n", encoded_uri.c_str());
 	printf("decodeURIComponent\n\t[%s]\n", MOONG::ConvertDataType::utf8_to_string(MOONG::Url::decodeURIComponent(encoded_uri)).c_str());
