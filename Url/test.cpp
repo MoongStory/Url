@@ -2,9 +2,11 @@
 
 #include "Url.h"
 
+#include "../../ConvertDataType/ConvertDataType/ConvertDataType.h"
+
 int main()
 {
-	const std::string url_address("https://www.example.com/path/to/myfile.html?key1=value1&key2=value2#SomewhereInTheDocument");
+	const std::string url_address("https://www.example.com/path/to/myfile.html?key1=value1&key2=value2#SomewhereInTheDocument«—±€¨Í¨÷¨›¨›¨Ì");
 
 	printf("address\n\t[%s]\n\n", url_address.c_str());
 
@@ -27,9 +29,9 @@ int main()
 	printf("encodeURI\n\t[%s]\n", encoded_uri.c_str());
 	printf("decodeURI\n\t[%s]\n\n", MOONG::Url::decodeURI(encoded_uri).c_str());
 
-	encoded_uri = MOONG::Url::encodeURIComponent(url_address);
+	encoded_uri = MOONG::Url::encodeURIComponent(MOONG::ConvertDataType::string_to_utf8(url_address));
 	printf("encodeURIComponent\n\t[%s]\n", encoded_uri.c_str());
-	printf("decodeURIComponent\n\t[%s]\n", MOONG::Url::decodeURIComponent(encoded_uri).c_str());
+	printf("decodeURIComponent\n\t[%s]\n", MOONG::ConvertDataType::utf8_to_string(MOONG::Url::decodeURIComponent(encoded_uri)).c_str());
 
 	return 0;
 }

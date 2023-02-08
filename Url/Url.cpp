@@ -215,11 +215,16 @@ const std::string MOONG::Url::decodeURI(const std::string& encoded)
 
 const std::string MOONG::Url::encodeURIComponent(const std::string& decoded)
 {
-	// FIXME: ÇÑ±Û ¾È µÊ.
 	std::string encode_uri;
 
 	for (size_t i = 0; i < decoded.length(); ++i) {
-		if (isalnum(decoded.at(i)) || decoded.at(i) == '-' || decoded.at(i) == '_' || decoded.at(i) == '.' || decoded.at(i) == '~')
+		if (('0' <= decoded.at(i) && decoded.at(i) <= '9') ||
+			('a' <= decoded.at(i) && decoded.at(i) <= 'z') ||
+			('A' <= decoded.at(i) && decoded.at(i) <= 'Z') ||
+			decoded.at(i) == '-' ||
+			decoded.at(i) == '_' ||
+			decoded.at(i) == '.' ||
+			decoded.at(i) == '~')
 		{
 			encode_uri += decoded.at(i);
 		}
@@ -240,7 +245,6 @@ const std::string MOONG::Url::encodeURIComponent(const std::string& decoded)
 
 const std::string MOONG::Url::decodeURIComponent(const std::string& encoded)
 {
-	// FIXME: ÇÑ±Û ¾È µÊ.
 	std::string decode_uri;
 
 	for (size_t i = 0; i < encoded.length(); ++i) {
@@ -267,11 +271,11 @@ const std::string MOONG::Url::decodeURIComponent(const std::string& encoded)
 
 const char MOONG::Url::from_hex(const char ch)
 {
-	return isdigit(ch) ? ch - '0' : tolower(ch) - 'a' + 10;
+	return isdigit(ch) ? ch - '0' : toupper(ch) - 'A' + 10;
 }
 
 const char MOONG::Url::to_hex(const char code)
 {
-	static char hex[] = "0123456789abcdef";
+	static char hex[] = "0123456789ABCDEF";
 	return hex[code & 15];
 }

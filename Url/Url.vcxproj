@@ -141,10 +141,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\ConvertDataType\ConvertDataType\ConvertDataType.cpp" />
+    <ClCompile Include="..\..\StringTool\StringTool\StringTool.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="Url.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\ConvertDataType\ConvertDataType\ConvertDataType.h" />
+    <ClInclude Include="..\..\StringTool\StringTool\StringTool.h" />
     <ClInclude Include="Url.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
