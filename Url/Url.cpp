@@ -207,15 +207,15 @@ const std::string MOONG::Url::encodeURI(const std::string& decoded)
 {
 	std::string encode_uri;
 
-	std::string characters_not_to_encode;
-	characters_not_to_encode += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	characters_not_to_encode += "abcdefghijklmnopqrstuvwxyz";
-	characters_not_to_encode += "1234567890";
-	characters_not_to_encode += "@*-_+./";
-	characters_not_to_encode += ":;/=?&#";
+	std::string exception_characters;
+	exception_characters += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	exception_characters += "abcdefghijklmnopqrstuvwxyz";
+	exception_characters += "0123456789";
+	exception_characters += "-_.!~*'()";
+	exception_characters += ";/?:@&=+$,#";
 
 	for (size_t i = 0; i < decoded.length(); ++i) {
-		if (characters_not_to_encode.find(decoded.at(i)) != std::string::npos)
+		if (exception_characters.find(decoded.at(i)) != std::string::npos)
 		{
 			encode_uri += decoded.at(i);
 		}
@@ -243,14 +243,14 @@ const std::string MOONG::Url::encodeURIComponent(const std::string& decoded)
 {
 	std::string encode_uri;
 
-	std::string characters_not_to_encode;
-	characters_not_to_encode += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	characters_not_to_encode += "abcdefghijklmnopqrstuvwxyz";
-	characters_not_to_encode += "1234567890";
-	characters_not_to_encode += "@*-_+./";
+	std::string exception_characters;
+	exception_characters += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	exception_characters += "abcdefghijklmnopqrstuvwxyz";
+	exception_characters += "0123456789";
+	exception_characters += "-_.!~*'()";
 
 	for (size_t i = 0; i < decoded.length(); ++i) {
-		if (characters_not_to_encode.find(decoded.at(i)) != std::string::npos)
+		if (exception_characters.find(decoded.at(i)) != std::string::npos)
 		{
 			encode_uri += decoded.at(i);
 		}
