@@ -25,9 +25,10 @@ int main()
 
 	printf("anchor\n\t[%s]\n\n", MOONG::Url::getAnchor(url_address).c_str());
 
-	std::string encoded_uri = MOONG::Url::encodeURI("https://mozilla.org/?x=¬ê¬Ö¬Ý¬Ý¬í");
+	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURI
+	std::string encoded_uri = MOONG::Url::encodeURI(MOONG::ConvertDataType::string_to_utf8(url_address));
 	printf("encodeURI\n\t[%s]\n", encoded_uri.c_str());
-	printf("decodeURI\n\t[%s]\n\n", MOONG::Url::decodeURI(encoded_uri).c_str());
+	printf("decodeURI\n\t[%s]\n\n", MOONG::ConvertDataType::utf8_to_string(MOONG::Url::decodeURI(encoded_uri)).c_str());
 
 	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent
 	encoded_uri = MOONG::Url::encodeURIComponent(MOONG::ConvertDataType::string_to_utf8(url_address));

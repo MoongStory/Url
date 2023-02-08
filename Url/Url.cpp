@@ -205,26 +205,52 @@ const std::string MOONG::Url::getAnchor(std::string url)
 
 const std::string MOONG::Url::encodeURI(const std::string& decoded)
 {
-	return std::string();
+	std::string encode_uri;
+
+	std::string characters_not_to_encode;
+	characters_not_to_encode += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	characters_not_to_encode += "abcdefghijklmnopqrstuvwxyz";
+	characters_not_to_encode += "1234567890";
+	characters_not_to_encode += "@*-_+./";
+	characters_not_to_encode += ":;/=?&#";
+
+	for (size_t i = 0; i < decoded.length(); ++i) {
+		if (characters_not_to_encode.find(decoded.at(i)) != std::string::npos)
+		{
+			encode_uri += decoded.at(i);
+		}
+		else if (decoded.at(i) == ' ')
+		{
+			encode_uri += '+';
+		}
+		else
+		{
+			encode_uri += '%';
+			encode_uri += to_hex(decoded.at(i) >> 4);
+			encode_uri += to_hex(decoded.at(i) & 15);
+		}
+	}
+
+	return encode_uri;
 }
 
 const std::string MOONG::Url::decodeURI(const std::string& encoded)
 {
-	return std::string();
+	return decodeURIComponent(encoded);
 }
 
 const std::string MOONG::Url::encodeURIComponent(const std::string& decoded)
 {
 	std::string encode_uri;
 
+	std::string characters_not_to_encode;
+	characters_not_to_encode += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	characters_not_to_encode += "abcdefghijklmnopqrstuvwxyz";
+	characters_not_to_encode += "1234567890";
+	characters_not_to_encode += "@*-_+./";
+
 	for (size_t i = 0; i < decoded.length(); ++i) {
-		if (('0' <= decoded.at(i) && decoded.at(i) <= '9') ||
-			('a' <= decoded.at(i) && decoded.at(i) <= 'z') ||
-			('A' <= decoded.at(i) && decoded.at(i) <= 'Z') ||
-			decoded.at(i) == '-' ||
-			decoded.at(i) == '_' ||
-			decoded.at(i) == '.' ||
-			decoded.at(i) == '~')
+		if (characters_not_to_encode.find(decoded.at(i)) != std::string::npos)
 		{
 			encode_uri += decoded.at(i);
 		}
