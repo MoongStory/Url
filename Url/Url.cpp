@@ -254,10 +254,13 @@ const std::string MOONG::Url::encodeURI_(const std::string& decoded, const bool 
 		{
 			encode_uri += decoded.at(i);
 		}
-		else if (decoded.at(i) == ' ')
-		{
-			encode_uri += '+';
-		}
+		// 공백은 '+'로 표시됐던걸 어디서 본 것 같은데 아래 mozilla 사이트에서 공백은 '%20'으로 표시되어 mozilla 사이트 결과와 동일하게 맞춤.
+		// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURI
+		// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent
+		//else if (decoded.at(i) == ' ')
+		//{
+		//	encode_uri += '+';
+		//}
 		else
 		{
 			encode_uri += '%';

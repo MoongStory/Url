@@ -6,7 +6,7 @@
 
 int main()
 {
-	const std::string url_address("https://www.example.com/path/to/myfile.html?key1=value1&key2=value2#SomewhereInTheDocument한글шеллы");
+	const std::string url_address("https://www.example.com/path/to/my file.html?key1=value1&key2=value2#Some where In The Document 한글 шеллы");
 	//const std::string url_address("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890-_.!~*'();,/?:@&=+$#");
 
 	printf("address\n\t[%s]\n\n", url_address.c_str());
