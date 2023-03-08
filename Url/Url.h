@@ -51,34 +51,34 @@ namespace MOONG
 	class Url
 	{
 	public:
-		static const std::string getProtocol(const std::string url);
+		static const std::string get_protocol(const std::string url);
 		
-		static const std::string getDomainName(const std::string url);
+		static const std::string get_domain_name(const std::string url);
 		
 		// return
 		//		RETURN::SUCCESS
 		//		RETURN::FAILURE::PORT_NOT_FOUND
-		static const int getPort(const std::string url, std::string& output);
+		static const int get_port(const std::string url, std::string& output);
 
-		static const int getPort(const std::string url);
+		static const int get_port(const std::string url);
 
-		static const std::string getPathToTheFile(const std::string url);
+		static const std::string get_path_to_the_file(const std::string url);
 		
-		static const std::string getParameters(const std::string url);
+		static const std::string get_parameters(const std::string url);
 		
-		static const std::string getAnchor(const std::string url);
+		static const std::string get_anchor(const std::string url);
 
-		static const std::string encodeURI(const std::string& decoded);
-		static const std::string decodeURI(const std::string& encoded);
-		static const std::string encodeURIComponent(const std::string& decoded);
-		static const std::string decodeURIComponent(const std::string& encoded);
+		static const std::string encode_uri(const std::string& decoded);
+		static const std::string decode_uri(const std::string& encoded);
+		static const std::string encode_uri_component(const std::string& decoded);
+		static const std::string decode_uri_component(const std::string& encoded);
 
 	private:
 		static const char from_hex(const char ch);
 		static const char to_hex(const char code);
 
-		static const std::string encodeURI_(const std::string& decoded, const bool use_component = false);
-		static const std::string decodeURI_(const std::string& encoded);
+		static const std::string encode_uri_(const std::string& decoded, const bool use_component = false);
+		static const std::string decode_uri_(const std::string& encoded);
 	};
 }
 

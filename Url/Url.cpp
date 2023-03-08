@@ -2,7 +2,7 @@
 
 #include <algorithm>	// std::transform 사용을 위해 필요.
 
-const std::string MOONG::Url::getProtocol(const std::string url)
+const std::string MOONG::Url::get_protocol(const std::string url)
 {
 	std::string output = url;
 
@@ -21,7 +21,7 @@ const std::string MOONG::Url::getProtocol(const std::string url)
 	return output;
 }
 
-const std::string MOONG::Url::getDomainName(const std::string url)
+const std::string MOONG::Url::get_domain_name(const std::string url)
 {
 	std::string output = url;
 
@@ -57,7 +57,7 @@ const std::string MOONG::Url::getDomainName(const std::string url)
 	return output;
 }
 
-const int MOONG::Url::getPort(const std::string url, std::string& output)
+const int MOONG::Url::get_port(const std::string url, std::string& output)
 {
 	output = url;
 
@@ -105,15 +105,15 @@ const int MOONG::Url::getPort(const std::string url, std::string& output)
 	return MOONG::URL::RETURN::SUCCESS;
 }
 
-const int MOONG::Url::getPort(const std::string url)
+const int MOONG::Url::get_port(const std::string url)
 {
 	std::string port;
-	MOONG::Url::getPort(url, port);
+	MOONG::Url::get_port(url, port);
 
 	return atoi(port.c_str());
 }
 
-const std::string MOONG::Url::getPathToTheFile(const std::string url)
+const std::string MOONG::Url::get_path_to_the_file(const std::string url)
 {
 	std::string output = url;
 
@@ -158,7 +158,7 @@ const std::string MOONG::Url::getPathToTheFile(const std::string url)
 	return output;
 }
 
-const std::string MOONG::Url::getParameters(const std::string url)
+const std::string MOONG::Url::get_parameters(const std::string url)
 {
 	std::string output = url;
 
@@ -184,7 +184,7 @@ const std::string MOONG::Url::getParameters(const std::string url)
 	return output;
 }
 
-const std::string MOONG::Url::getAnchor(std::string url)
+const std::string MOONG::Url::get_anchor(std::string url)
 {
 	std::string output = url;
 
@@ -203,24 +203,24 @@ const std::string MOONG::Url::getAnchor(std::string url)
 	return output;
 }
 
-const std::string MOONG::Url::encodeURI(const std::string& decoded)
+const std::string MOONG::Url::encode_uri(const std::string& decoded)
 {
-	return encodeURI_(decoded);
+	return encode_uri_(decoded);
 }
 
-const std::string MOONG::Url::decodeURI(const std::string& encoded)
+const std::string MOONG::Url::decode_uri(const std::string& encoded)
 {
-	return decodeURI_(encoded);
+	return decode_uri_(encoded);
 }
 
-const std::string MOONG::Url::encodeURIComponent(const std::string& decoded)
+const std::string MOONG::Url::encode_uri_component(const std::string& decoded)
 {
-	return encodeURI_(decoded, true);
+	return encode_uri_(decoded, true);
 }
 
-const std::string MOONG::Url::decodeURIComponent(const std::string& encoded)
+const std::string MOONG::Url::decode_uri_component(const std::string& encoded)
 {
-	return decodeURI_(encoded);
+	return decode_uri_(encoded);
 }
 
 const char MOONG::Url::from_hex(const char ch)
@@ -235,7 +235,7 @@ const char MOONG::Url::to_hex(const char code)
 	return hex[code & 15];
 }
 
-const std::string MOONG::Url::encodeURI_(const std::string& decoded, const bool use_component/* = false*/)
+const std::string MOONG::Url::encode_uri_(const std::string& decoded, const bool use_component/* = false*/)
 {
 	std::string encode_uri;
 
@@ -272,7 +272,7 @@ const std::string MOONG::Url::encodeURI_(const std::string& decoded, const bool 
 	return encode_uri;
 }
 
-const std::string MOONG::Url::decodeURI_(const std::string& encoded)
+const std::string MOONG::Url::decode_uri_(const std::string& encoded)
 {
 	std::string decode_uri;
 
